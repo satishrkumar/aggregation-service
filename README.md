@@ -13,6 +13,7 @@ For building and running the application you need:
 - [JDK 11](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 - [Maven 3](https://maven.apache.org)
 - [Docker](https://docs.docker.com/get-docker/)
+- docker container run --publish 4000:4000 qwkz/backend-services:latest.
 
 ## How to Run 
 
@@ -35,17 +36,21 @@ Once the application runs you should see something like this
     
 ```
 
-* Build Docker image:
-docker build -t aggregation-service .
+* Build Docker image:<br>
+    * docker build -t aggregation-service .
 
 * Docker command to run on local machine:
 
-docker network rm test
-docker network create test
-docker stop satishContainer satishContainer2
-docker rm satishContainer satishContainer2
-docker run -d -p 4000:4000  --network test --name satishContainer qwkz/backend-services
-docker run -d -p 8080:8080 -e base-url=http://satishContainer:4000 --network test --name satishContainer2 aggregation-service
+
+
+Use four spaces to indent content between bullet points
+
+1. docker network rm test<br>
+1. docker network create test<br>
+1. docker stop satishContainer satishContainer2<br>
+1. docker rm satishContainer satishContainer2<br>
+1. docker run -d -p 4000:4000  --network test --name satishContainer qwkz/backend-services<br>
+1. docker run -d -p 8080:8080 -e base-url=http://satishContainer:4000 --network test --name satishContainer2 aggregation-service<br>
 
 * Curl command to test api:
 
