@@ -61,6 +61,8 @@ Use four spaces to indent content between bullet points
  curl --location 'http://127.0.0.1:8080/aggregation?shipmentsOrderNumbers=987654321%2C123456789&trackOrderNumbers=987654321%2C123456789&pricingCountryCodes=NL%2CCN'
 ``` 
 Response
+
+``` 
 {
     "shipments": {
         "987654321": [
@@ -83,7 +85,7 @@ Response
     }
 }
 ```
- curl --location 'http://127.0.0.1:8080/aggregation?shipmen
+ 
 * Design:   
-
+    * Sequence flow
 ![Image name](./AggregationController_aggregate.svg)
