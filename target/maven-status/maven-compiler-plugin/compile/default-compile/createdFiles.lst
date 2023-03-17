@@ -1,8 +1,0 @@
-com/assignment/aggregation/transformer/ServiceContextToJson.class
-com/assignment/aggregation/model/ServiceType.class
-com/assignment/aggregation/common/ServiceUrlBuilder.class
-com/assignment/aggregation/model/ServiceContext$ServiceContextBuilder.class
-com/assignment/aggregation/AggregationServiceApplication.class
-com/assignment/aggregation/controller/AggregationController.class
-com/assignment/aggregation/service/ServiceExecutor.class
-com/assignment/aggregation/model/ServiceContext.class
