@@ -28,14 +28,14 @@ This application is packaged as a war which has Tomcat 9.0.x embedded. No Tomcat
 * Check the stdout to make sure no exceptions are thrown
 
 Once the application runs you should see something like this
-
+<div style="overflow-x: auto;">
 ```
     2023-03-16 20:24:07.432  INFO 30497 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
     2023-03-16 20:24:07.549  INFO 30497 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
     2023-03-16 20:24:07.555  INFO 30497 --- [           main] c.a.a.AggregationServiceApplication      : Started AggregationServiceApplication in 1.167 seconds (JVM running for 1.388)
     
 ```
-
+</div>
 * Build Docker image:<br>
     * docker build -t aggregation-service .
 
