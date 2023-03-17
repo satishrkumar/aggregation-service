@@ -39,9 +39,9 @@ public class AggregationController {
         serviceContext.addAll(serviceUrlBuilder.buildPricingUrl(pricingCountryCodes));
 
         serviceContext = serviceContext.parallelStream()
-                .map(serviceContext1 -> {
-                    serviceContext1.setResponse(serviceExecutor.getResponse(serviceContext1.getUrl()));
-                    return serviceContext1;
+                .map(context -> {
+                    context.setResponse(serviceExecutor.getResponse(context.getUrl()));
+                    return context;
                 })
                 .filter(v -> Objects.nonNull(v.getResponse()))
                 .collect(Collectors.toList());
