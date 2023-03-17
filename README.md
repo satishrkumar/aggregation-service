@@ -86,6 +86,8 @@ Response
 }
 ```
  
-* Design:   
+* Design:
+
     * Sequence flow
-![Image name](./AggregationController_aggregate.svg)
+
+    ![Image name](./AggregationController_aggregate.svg)
