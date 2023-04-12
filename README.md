@@ -44,10 +44,6 @@ Once the application runs you should see something like this
 
 * Docker command to run on local machine:
 
-
-
-Use four spaces to indent content between bullet points
-
 1. docker network rm test<br>
 1. docker network create test<br>
 1. docker stop satishContainer satishContainer2<br>
