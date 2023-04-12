@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title th:text="${title}"></title>
+    <script src="/webjars/echarts/5.2.2/dist/echarts.min.js"></script>
+</head>
+<body>
+<div id="myChart" style="width: 600px;height:400px;"></div>
+
+<script>
+        var myChart = echarts.init(document.getElementById('myChart'));
+
+        myChart.setOption({
+            title: { text: '[[${title}]]' },
+            tooltip: {},
+            legend: { data:['Sales'] },
+            xAxis: { data: [${categories}] },
+            yAxis: {},
+            series: [{
+                name: 'Sales',
+                type: 'bar',
+                data: [${data}]
+            }]
+        });
+    </script>
+</body>
+</html>

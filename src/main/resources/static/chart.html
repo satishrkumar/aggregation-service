@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ECharts Example</title>
+    <script src="/webjars/echarts/5.2.2/dist/echarts.min.js"></script>
+</head>
+<body>
+<div id="myChart" style="width: 600px;height:400px;"></div>
+
+<script>
+        var myChart = echarts.init(document.getElementById('myChart'));
+
+        myChart.setOption({
+            title: { text: 'ECharts Example' },
+            tooltip: {},
+            legend: { data:['Sales'] },
+            xAxis: { data: ["Shirts","Pants","Shoes","Hats","Bags"] },
+            yAxis: {},
+            series: [{
+                name: 'Sales',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10]
+            }]
+        });
+    </script>
+</body>
+</html>
