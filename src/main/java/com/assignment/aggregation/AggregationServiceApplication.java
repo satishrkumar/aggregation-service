@@ -12,6 +12,7 @@ public class AggregationServiceApplication {
     public ResourceResolver resourceResolver() {
         return new WebJarsResourceResolver();
     }
+
     public static void main(String[] args) {
         SpringApplication.run(AggregationServiceApplication.class, args);
     }

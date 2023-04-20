@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chart Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<style>
+    .canvas-container {
+        position: relative;
+    }
+
+    #performanceChart {
+        z-index: 1;
+    }
+
+    #requestChart {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+    }
+
+    #close-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        z-index: 3;
+    }
+</style>
+
+<body>
+
+<div class="canvas-container">
+    <canvas id="performanceChart"></canvas>
+    <canvas id="requestChart" style="display:none;"></canvas>
+    <button id="close-btn" style="display:none;">Close</button>
+</div>
+<script>
+        var chart;
+        fetch('/performance')
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('performanceChart').getContext('2d');
+                chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data.map(entry => entry.date),
+                        datasets: [
+                            {
+                                label: 'API Request Time Taken',
+                                data: data.map(entry => entry.timeTaken),
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        onClick: (event, elements, chart) => {
+                            if (elements[0]) {
+                                const i = elements[0].index;
+                                performanceChart.style.display = 'none';
+                                requestChart.style.display = 'block';
+                                closeBtn.style.display = 'block';
+                                const data = chart.data.datasets[0].data[i];
+                                console.log('Data point clicked:', data);
+                                const label = chart.data.labels[i];
+                                console.log('Label:', label);
+                                const queryString = '?requestName=' + label;
+                                fetch('/requestChart' + queryString)
+                                    .then(response => response.json())
+                                    .then(chartData => {
+                                        var ctx = document.getElementById('requestChart').getContext('2d');
+                                        var chart = new Chart(ctx, {
+                                            type: 'bar',
+                                            data: {
+                                                labels: chartData.labels,
+                                                datasets: [{
+                                                    label: 'Time Taken',
+                                                    data: chartData.timeTaken,
+                                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                                    borderWidth: 1
+                                                }]
+                                            },
+                                            options: {
+                                                responsive: true,
+                                                scales: {
+                                                    yAxes: [{
+                                                        ticks: {
+                                                            beginAtZero: true
+                                                        }
+                                                    }]
+                                                }
+                                            }
+                                        });
+                                    });
+                            }
+                        },
+                        responsive: true,
+                        scales: {
+                            xAxes: [{
+                                type: 'time',
+                                time: {
+                                    unit: 'minute',
+                                    displayFormats: {
+                                        minute: 'MMM D, h:mm a'
+                                    }
+                                },
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Date and Time'
+                                }
+                            }],
+                            yAxes: [{
+                                stacked: false,
+        scaleLabel: {
+          display: true,
+          fontColor: 'white',
+          fontSize: 25,
+          labelString: 'Faction Points'
+        },
+        ticks: {
+          fontColor: 'white',
+          fontSize: 20,
+          min: 0
+        },
+        gridLines: {
+          color: 'white'
+        }
+                            }]
+                        }
+                    }
+                });
+            });
+
+
+
+        const performanceChart = document.getElementById('performanceChart');
+        const requestChart = document.getElementById('requestChart');
+        const closeBtn = document.getElementById('close-btn');
+
+        closeBtn.addEventListener('click', () => {
+            requestChart.style.display = 'none';
+            performanceChart.style.display = 'block';
+            closeBtn.style.display = 'none';
+        });
+
+    </script>
+</body>
+
+</html>

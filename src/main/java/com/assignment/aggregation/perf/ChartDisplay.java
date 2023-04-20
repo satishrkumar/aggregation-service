@@ -1,8 +1,11 @@
 package com.assignment.aggregation.perf;
 
-import javax.swing.*;
-import org.jfree.chart.*;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
+
+import javax.swing.*;
 
 public class ChartDisplay extends JFrame {
 

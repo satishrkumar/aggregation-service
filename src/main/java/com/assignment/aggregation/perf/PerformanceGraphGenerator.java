@@ -1,32 +1,26 @@
 package com.assignment.aggregation.perf;
 
-import ch.qos.logback.core.rolling.helper.FileStoreUtil;
-import ch.qos.logback.core.util.FileUtil;
 import com.opencsv.CSVReader;
 import com.opencsv.ColonReader;
 import com.opencsv.exceptions.CsvException;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
-import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.springframework.util.FileCopyUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class PerformanceGraphGenerator extends JFrame {
     private JFreeChart chart;
     private ChartPanel chartPanel;
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             try {
@@ -38,14 +32,15 @@ public class PerformanceGraphGenerator extends JFrame {
             }
         });
     }
+
     public PerformanceGraphGenerator() throws IOException, CsvException {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         Files.list(Path.of("/Users/sandhya/download")).forEach(path -> {
             CSVReader reader = null;
             try {
-                reader = new ColonReader(new FileReader(path.toAbsolutePath().toString()),3);
+                reader = new ColonReader(new FileReader(path.toAbsolutePath().toString()), 3);
             } catch (FileNotFoundException e) {
-               throw new RuntimeException(e.getMessage());
+                throw new RuntimeException(e.getMessage());
             }
             List<String[]> rows = null;
             try {
@@ -56,7 +51,7 @@ public class PerformanceGraphGenerator extends JFrame {
                 throw new RuntimeException(e.getMessage());
             }
             for (String[] row : rows) {
-                if(6==row.length) {
+                if (6 == row.length) {
                     String cpuTime = row[4].trim();
                     if (!cpuTime.equals("~")) {
                         String testName = row[1].trim();
@@ -105,8 +100,9 @@ public class PerformanceGraphGenerator extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         //ChartUtils.saveChartAsJPEG(new File("performance-graph.png"), chart, 2400, 1200);
-       // ChartUtilities.saveChartAsPNG(new File("performance-graph.png"), chart, 600, 400);
+        // ChartUtilities.saveChartAsPNG(new File("performance-graph.png"), chart, 600, 400);
     }
+
     public static float findAverage(float[] numbers) {
         float sum = 0;
         for (float number : numbers) {
